@@ -1,8 +1,10 @@
-package com.mygdx.game;
+package com.mygdx.game.actors;
 
 import com.badlogic.gdx.Gdx;
+import com.mygdx.game.actors.Ball;
+import com.mygdx.game.actors.Paddle;
 
-public class RightPaddle extends Paddle{
+public class RightPaddle extends Paddle {
     private Ball ball;
     public RightPaddle(float x, float y,Ball ball) {
         super(x, y);

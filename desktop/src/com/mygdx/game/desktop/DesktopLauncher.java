@@ -9,6 +9,8 @@ public class DesktopLauncher {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		config.height = 500;
 		config.width  = 800;
+		config.title = "Pong";
+
 		new LwjglApplication(new Main(), config);
 	}
 }

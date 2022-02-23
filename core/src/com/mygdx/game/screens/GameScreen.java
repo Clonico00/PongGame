@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
@@ -8,13 +8,18 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.actors.Ball;
+import com.mygdx.game.actors.LeftPaddle;
+import com.mygdx.game.Main;
+import com.mygdx.game.actors.Paddle;
+import com.mygdx.game.actors.RightPaddle;
 
-public class GameScreen extends AbstractScreen{
+public class GameScreen extends AbstractScreen {
 
     private SpriteBatch batch;
     private Texture texture;
     private  float escala;
-    private  Paddle palaizquierda;
+    private Paddle palaizquierda;
     private RightPaddle paladerecha;
     private Ball ball;
     private BitmapFont font;

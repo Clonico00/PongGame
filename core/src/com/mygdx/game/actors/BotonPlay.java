@@ -1,9 +1,10 @@
-package com.mygdx.game;
+package com.mygdx.game.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
+import com.mygdx.game.screens.Screens;
 
-public class BotonPlay extends Button{
+public class BotonPlay extends Button {
 
     public BotonPlay(int x, int y) {
         super(x, y);

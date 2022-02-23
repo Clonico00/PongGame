@@ -1,9 +1,9 @@
-package com.mygdx.game;
+package com.mygdx.game.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 
-public class BotonExit extends Button{
+public class BotonExit extends Button {
 
     public BotonExit(int x, int y) {
         super(x, y);

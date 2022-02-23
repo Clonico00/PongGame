@@ -1,6 +1,7 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Screen;
+import com.mygdx.game.Main;
 
 public class AbstractScreen implements Screen {
     protected Main main;

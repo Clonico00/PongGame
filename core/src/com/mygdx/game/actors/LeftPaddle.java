@@ -1,10 +1,11 @@
-package com.mygdx.game;
+package com.mygdx.game.actors;
 
 import com.badlogic.gdx.Application;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
+import com.mygdx.game.actors.Paddle;
 
-public class LeftPaddle extends Paddle{
+public class LeftPaddle extends Paddle {
 
 
     public LeftPaddle(float x, float y) {

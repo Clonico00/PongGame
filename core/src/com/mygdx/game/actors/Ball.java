@@ -1,4 +1,4 @@
-package com.mygdx.game;
+package com.mygdx.game.actors;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.audio.Sound;
@@ -7,7 +7,7 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
 
 public class Ball {
-    private static final float SPEED = 200;
+    private float SPEED = 200;
 
     private Texture texture;
     private Rectangle bordes;
@@ -36,6 +36,7 @@ public class Ball {
         if(choquePalas(leftPaddle.getBordes(),rightPaddle.getBordes())){
             direccionX = direccionX * -1;
             sonido.play();
+            SPEED = SPEED +10;
         }
         bordes.x = bordes.x + SPEED * delta * direccionX;
         bordes.y = bordes.y + SPEED * delta * direccionY;
@@ -64,6 +65,7 @@ public class Ball {
         if(bordes.x < 0 || bordes.x > Gdx.graphics.getWidth()) {
             bordes.x = posicionOriginalX;
             bordes.y = posicionOriginalY;
+            SPEED = 200;
         }
     }
     public  Rectangle getBordes(){

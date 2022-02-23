@@ -1,11 +1,15 @@
-package com.mygdx.game;
+package com.mygdx.game.screens;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.actors.BotonExit;
+import com.mygdx.game.actors.BotonPlay;
+import com.mygdx.game.actors.Button;
+import com.mygdx.game.Main;
 
-public class MainScreen extends AbstractScreen{
+public class MainScreen extends AbstractScreen {
 
     private SpriteBatch batch;
     private Button exit,play;

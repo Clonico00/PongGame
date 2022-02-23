@@ -1,8 +1,10 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.mygdx.game.screens.GameScreen;
+import com.mygdx.game.screens.MainScreen;
+import com.mygdx.game.screens.Screens;
 
 public class Main extends Game {
 	private SpriteBatch batch;
