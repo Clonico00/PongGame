@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.math.Rectangle;
@@ -12,6 +13,7 @@ public class Ball {
     private Rectangle bordes;
     private int direccionX, direccionY;
     private float posicionOriginalX,posicionOriginalY;
+    private Sound sonido;
 
     public Ball(float x, float y) {
         texture = new Texture(Gdx.files.internal("bola.png"));
@@ -19,6 +21,7 @@ public class Ball {
         direccionX = direccionY = 1;
         posicionOriginalX = x;
         posicionOriginalY = y;
+        sonido = Gdx.audio.newSound(Gdx.files.internal("golpe.ogg"));
     }
 
     public void draw(SpriteBatch batch){
@@ -32,6 +35,7 @@ public class Ball {
         }
         if(choquePalas(leftPaddle.getBordes(),rightPaddle.getBordes())){
             direccionX = direccionX * -1;
+            sonido.play();
         }
         bordes.x = bordes.x + SPEED * delta * direccionX;
         bordes.y = bordes.y + SPEED * delta * direccionY;

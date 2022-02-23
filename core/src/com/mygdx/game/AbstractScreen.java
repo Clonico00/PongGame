@@ -3,7 +3,7 @@ package com.mygdx.game;
 import com.badlogic.gdx.Screen;
 
 public class AbstractScreen implements Screen {
-    private Main main;
+    protected Main main;
 
     public AbstractScreen(Main main) {
         this.main = main;

@@ -1,17 +1,27 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Game;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 
 public class Main extends Game {
-	public AbstractScreen GAMESCREEN;
+	private SpriteBatch batch;
+
 	@Override
 	public void create () {
-		GAMESCREEN = new GameScreen(this);
-		setScreen(GAMESCREEN);
+		batch = new SpriteBatch();
+		Screens.juego = this;
+		Screens.GAMESCREEN = new GameScreen(this);
+		Screens.MAINSCREEN = new MainScreen(this);
+		setScreen(Screens.MAINSCREEN);
 	}
 
 	@Override
 	public void dispose(){
-		GAMESCREEN.dispose();
+		batch.dispose();
+		Screens.GAMESCREEN.dispose();
+	}
+	public  SpriteBatch getBatch() {
+		return batch;
 	}
 }

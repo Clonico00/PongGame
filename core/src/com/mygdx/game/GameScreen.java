@@ -1,6 +1,7 @@
 package com.mygdx.game;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Preferences;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL20;
@@ -20,12 +21,16 @@ public class GameScreen extends AbstractScreen{
     private int puntuacion,puntuacionMaxima;
     private Preferences preferencias;
     public GameScreen(Main main) {
+
         super(main);
+        preferencias = Gdx.app.getPreferences("Preferencias pong");
+        puntuacionMaxima = preferencias.getInteger("puntuacionMaxima");
+
     }
 
     @Override
     public void show() {
-        batch = new SpriteBatch();
+        batch = main.getBatch();
         texture = new Texture(Gdx.files.internal("pongcampo.png"));
         Texture texturabola = new Texture(Gdx.files.internal("bola.png"));
         Texture texturapala = new Texture(Gdx.files.internal("pala.png"));
@@ -35,9 +40,7 @@ public class GameScreen extends AbstractScreen{
         font = new BitmapFont();
         font.setColor(Color.ORANGE);
         puntuacion = 0;
-        preferencias = Gdx.app.getPreferences("Preferencias pong");
-        puntuacionMaxima = preferencias.getInteger("puntuacionMaxima");
-    }
+   }
 
     @Override
     public void render(float delta) {
@@ -48,7 +51,7 @@ public class GameScreen extends AbstractScreen{
         palaizquierda.update();
         paladerecha.update();
         ball.update(palaizquierda,paladerecha);
-
+        salirMenu();
         batch.begin();
         batch.draw(texture,0,0,texture.getWidth() / escala ,texture.getHeight() / escala);
         palaizquierda.draw(batch);
@@ -87,12 +90,21 @@ public class GameScreen extends AbstractScreen{
         }
         ball.comprobarPosicionBola();
     }
+    private void salirMenu(){
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE) || Gdx.input.isKeyPressed(Input.Keys.BACK)){
+            Screens.juego.setScreen(Screens.MAINSCREEN);
+        }
+    }
+
+    public void hide() {
+        font.dispose();
+        texture.dispose();
+    }
+
     @Override
     public void dispose(){
         preferencias.putInteger("puntuacionMaxima",puntuacionMaxima);
         preferencias.flush();
-        font.dispose();
-        texture.dispose();
-        batch.dispose();
+
     }
 }
