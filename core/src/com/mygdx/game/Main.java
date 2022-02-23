@@ -10,4 +10,8 @@ public class Main extends Game {
 		setScreen(GAMESCREEN);
 	}
 
+	@Override
+	public void dispose(){
+		GAMESCREEN.dispose();
+	}
 }

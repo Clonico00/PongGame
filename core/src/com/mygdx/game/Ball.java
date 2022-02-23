@@ -35,7 +35,6 @@ public class Ball {
         }
         bordes.x = bordes.x + SPEED * delta * direccionX;
         bordes.y = bordes.y + SPEED * delta * direccionY;
-        comprobarPosicionBola();
     }
     private boolean choqueParedes(){
         if(bordes.y + texture.getHeight() > Gdx.graphics.getHeight()){
@@ -57,7 +56,7 @@ public class Ball {
         }
         else return false;
     }
-    private void comprobarPosicionBola(){
+    public void comprobarPosicionBola(){
         if(bordes.x < 0 || bordes.x > Gdx.graphics.getWidth()) {
             bordes.x = posicionOriginalX;
             bordes.y = posicionOriginalY;
