@@ -10,8 +10,9 @@ public class GameScreen extends AbstractScreen{
     private SpriteBatch batch;
     private Texture texture;
     private  float escala;
-    private  Paddle palaizquierda,paladerecha;
-
+    private  Paddle palaizquierda;
+    private RightPaddle paladerecha;
+    private Ball ball;
     public GameScreen(Main main) {
         super(main);
     }
@@ -20,9 +21,11 @@ public class GameScreen extends AbstractScreen{
     public void show() {
         batch = new SpriteBatch();
         texture = new Texture(Gdx.files.internal("pongcampo.png"));
+        Texture texturabola = new Texture(Gdx.files.internal("bola.png"));
         Texture texturapala = new Texture(Gdx.files.internal("pala.png"));
+        ball = new Ball(Gdx.graphics.getWidth() / 2 - texturabola.getWidth() / 2 , Gdx.graphics.getHeight() / 2 - texturabola.getHeight() / 2);
         palaizquierda = new LeftPaddle(80,Gdx.graphics.getHeight() / 2- texturapala.getHeight() / 2);
-        paladerecha = new RightPaddle(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() / 2- texturapala.getHeight() / 2);
+        paladerecha = new RightPaddle(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() / 2- texturapala.getHeight() / 2,ball);
     }
 
     @Override
@@ -31,11 +34,14 @@ public class GameScreen extends AbstractScreen{
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
         palaizquierda.update();
+        paladerecha.update();
+        ball.update(palaizquierda,paladerecha);
 
         batch.begin();
         batch.draw(texture,0,0,texture.getWidth() / escala ,texture.getHeight() / escala);
         palaizquierda.draw(batch);
         paladerecha.draw(batch);
+        ball.draw(batch);
         batch.end();
 
     }

@@ -6,7 +6,6 @@ import com.badlogic.gdx.Input;
 
 public class LeftPaddle extends Paddle{
 
-    public  static final float SPEED = 400;
 
     public LeftPaddle(float x, float y) {
         super(x, y);
@@ -24,7 +23,7 @@ public class LeftPaddle extends Paddle{
     }
 
     private void inputDeskop(float delta){
-        if(Gdx.input.isKeyPressed(Input.Keys.W)) {
+        if(Gdx.input.isKeyPressed(Input.Keys.DPAD_UP)) {
             if (choqueArriba()){
                 bordes.y = Gdx.graphics.getHeight() - texture.getHeight();
             }else{
@@ -32,7 +31,7 @@ public class LeftPaddle extends Paddle{
 
             }
         }
-        if (Gdx.input.isKeyPressed(Input.Keys.S)){
+        if (Gdx.input.isKeyPressed(Input.Keys.DPAD_DOWN)){
             if (choqueAbajo()){
                 bordes.y = 0;
             }else{
@@ -69,11 +68,5 @@ public class LeftPaddle extends Paddle{
         }
     }
 
-    private boolean choqueArriba(){
-        return bordes.y + texture.getHeight() >= Gdx.graphics.getHeight();
-    }
 
-    private  boolean choqueAbajo(){
-        return bordes.y <= 0;
-    }
 }

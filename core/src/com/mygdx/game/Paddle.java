@@ -8,6 +8,7 @@ import com.badlogic.gdx.math.Rectangle;
 public abstract class Paddle {
     protected Texture texture;
     protected Rectangle bordes;
+    public  static final float SPEED = 400;
 
     public Paddle(float x, float y){
         texture = new Texture(Gdx.files.internal("pala.png"));
@@ -21,5 +22,13 @@ public abstract class Paddle {
 
     public Rectangle getBordes(){
         return bordes;
+    }
+
+    protected boolean choqueArriba(){
+        return bordes.y + texture.getHeight() >= Gdx.graphics.getHeight();
+    }
+
+    protected   boolean choqueAbajo(){
+        return bordes.y <= 0;
     }
 }
