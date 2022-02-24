@@ -25,6 +25,7 @@ public class GameScreen extends AbstractScreen {
     private BitmapFont font;
     private int puntuacion,puntuacionMaxima;
     private Preferences preferencias;
+
     public GameScreen(Main main) {
 
         super(main);
