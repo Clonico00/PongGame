@@ -10,14 +10,15 @@ public class Ball {
     private float SPEED = 200;
 
     private Texture texture;
-    private Rectangle bordes;
-    private int direccionX, direccionY;
-    private float posicionOriginalX,posicionOriginalY;
-    private Sound sonido;
+    private Rectangle bordes; // Objeto que nos determinará la posición de la bola y permite detectar colisiones con otros rectangulos.
+    private int direccionX, direccionY; // Permite invertir la dirección de la bola en el eje x e y respectivamente
+    private float posicionOriginalX, posicionOriginalY; // Guarda la posición original de la bola cuando esta se crea.
+    private Sound sonido; // Sonido cuando colisiona con las palas
 
     public Ball(float x, float y) {
         texture = new Texture(Gdx.files.internal("bola.png"));
         bordes = new Rectangle(x,y, texture.getWidth(), texture.getHeight());
+        // Lo ponemos a 1 los dos para que se mueva al inicio hacia arriba a la derecha
         direccionX = direccionY = 1;
         posicionOriginalX = x;
         posicionOriginalY = y;
@@ -31,11 +32,14 @@ public class Ball {
     public void update(Paddle leftPaddle, Paddle rightPaddle){
         float delta = Gdx.graphics.getDeltaTime();
         if(choqueParedes()){
+            // Cambiamos la dirección en el eje y
             direccionY = direccionY * -1;
         }
         if(choquePalas(leftPaddle.getBordes(),rightPaddle.getBordes())){
+            // Cambiamos la dirección en el eje x
             direccionX = direccionX * -1;
             sonido.play();
+            // Incrementamos la velocidad
             SPEED = SPEED +10;
         }
         bordes.x = bordes.x + SPEED * delta * direccionX;

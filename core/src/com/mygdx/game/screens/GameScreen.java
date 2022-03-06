@@ -22,9 +22,9 @@ public class GameScreen extends AbstractScreen {
     private Paddle palaizquierda;
     private RightPaddle paladerecha;
     private Ball ball;
-    private BitmapFont font;
-    private int puntuacion,puntuacionMaxima;
-    private Preferences preferencias;
+    private BitmapFont font; // Nos permite introducir texto en en el juego.
+    private Preferences preferencias; // Permite almacenar información en un fichero xml, de manera que el juego pueda extraerlos y sobreescribirlos.
+    private int puntuacion, puntuacionMaxima; // Las dos puntuaciones del juego.
 
     public GameScreen(Main main) {
 
@@ -38,8 +38,8 @@ public class GameScreen extends AbstractScreen {
     public void show() {
         batch = main.getBatch();
         texture = new Texture(Gdx.files.internal("pongcampo.png"));
-        Texture texturabola = new Texture(Gdx.files.internal("bola.png"));
-        Texture texturapala = new Texture(Gdx.files.internal("pala.png"));
+        Texture texturabola = new Texture(Gdx.files.internal("bola.png"));// Cogemos la textura para calcular el alto y ancho de la bola y centrarla en la pantalla
+        Texture texturapala = new Texture(Gdx.files.internal("pala.png"));// Cogemos la textura para calcular el alto de la pala y centrarla en la pantalla
         ball = new Ball(Gdx.graphics.getWidth() / 2 - texturabola.getWidth() / 2 , Gdx.graphics.getHeight() / 2 - texturabola.getHeight() / 2);
         palaizquierda = new LeftPaddle(80,Gdx.graphics.getHeight() / 2- texturapala.getHeight() / 2);
         paladerecha = new RightPaddle(Gdx.graphics.getWidth() - 100, Gdx.graphics.getHeight() / 2- texturapala.getHeight() / 2,ball);
@@ -53,10 +53,10 @@ public class GameScreen extends AbstractScreen {
         Gdx.gl.glClearColor(0,0,0,0);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        updatePuntuacion();
-        palaizquierda.update();
-        paladerecha.update();
-        ball.update(palaizquierda,paladerecha);
+        updatePuntuacion();// Actualizamos los valores de la puntuación.
+        palaizquierda.update();// Método que permitirá actualizar los valores de la pala, así como detectar si estamos pulsando el botón adecuado para para moverla.
+        paladerecha.update();// Actualizamos los valores de la pala derecha, para que se mueva en la pantalla.
+        ball.update(palaizquierda,paladerecha);// Permite que la bola se mueva, y al pasarle las dos palas podemos detectar la colisión con ellas.
         salirMenu();
         batch.begin();
         batch.draw(texture,0,0,texture.getWidth() / escala ,texture.getHeight() / escala);
@@ -85,19 +85,19 @@ public class GameScreen extends AbstractScreen {
         escala = width / widthImage; // Guardamos la escala
     }
     private  void updatePuntuacion(){
-        if(ball.getBordes().overlaps(palaizquierda.getBordes())){
+        if(ball.getBordes().overlaps(palaizquierda.getBordes())){// Si colisiona la bola con la pala izquierda
             puntuacion = puntuacion + 1;
-            if(puntuacion > puntuacionMaxima){
+            if(puntuacion > puntuacionMaxima){// Si la puntuación es mayor que la puntuacion máxima.
                 puntuacionMaxima = puntuacion;
             }
         }
-        if(ball.getBordes().x <= 0){
+        if(ball.getBordes().x <= 0){ // Si se sale la pelota por el extremo izquierdo
             puntuacion = 0;
         }
-        ball.comprobarPosicionBola();
+        ball.comprobarPosicionBola();// Colocamos la bola en su posicion si se sale del escenario.
     }
     private void salirMenu(){
-        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE) || Gdx.input.isKeyPressed(Input.Keys.BACK)){
+        if(Gdx.input.isKeyPressed(Input.Keys.ESCAPE) || Gdx.input.isKeyPressed(Input.Keys.BACK)){// Si se pulsa el botón "escape" en PC o "Back" en android
             Screens.juego.setScreen(Screens.MAINSCREEN);
         }
     }

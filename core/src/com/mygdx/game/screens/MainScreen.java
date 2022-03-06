@@ -18,11 +18,11 @@ public class MainScreen extends AbstractScreen {
         super(main);
     }
 
-    public void show() {
+    public void show() {// Método que se llama cuando se establece esta pantalla como actual
         batch = main.getBatch();
-        Texture texture = new Texture(Gdx.files.internal("BotonExit.png"));
-         int centroY = Gdx.graphics.getHeight() / 2 - texture.getHeight() / 2;
-         int centroX = Gdx.graphics.getWidth() / 2 - texture.getWidth() / 2;
+        Texture texture = new Texture(Gdx.files.internal("BotonExit.png"));// Cogemos la textura del botón para usar su ancho y alto
+        int centroY = Gdx.graphics.getHeight() / 2 - texture.getHeight() / 2; // Centro en el eje x de la pantalla centrando el botón
+        int centroX = Gdx.graphics.getWidth() / 2 - texture.getWidth() / 2; // Centro en el eje y de la pantalla centrando el botón
          exit = new BotonExit(centroX,centroY - 50);
          play = new BotonPlay(centroX,centroY + 50);
     }
@@ -31,7 +31,7 @@ public class MainScreen extends AbstractScreen {
         Gdx.gl.glClearColor(0,0,0,1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        exit.update();
+        exit.update();// Comprobamos que se pulsan los botones
         play.update();
 
         batch.begin();

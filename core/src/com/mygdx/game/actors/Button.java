@@ -38,9 +38,7 @@ public abstract class Button { // Clase abstracta que representa un botón cuyo 
                 Gdx.input.getY() >= yMinima && Gdx.input.getY() <= yMaxima;
     }
 
-    protected abstract void funcionamiento(); // Método que implementarán las clases hijas y contendrá el comportamiento deseado
-
-    // Getters and Setters ------------------------------------------------------------------------
+    protected abstract void funcionamiento();
 
     public Rectangle getBordes() {
         return bordes;
