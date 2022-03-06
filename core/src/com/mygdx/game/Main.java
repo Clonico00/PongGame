@@ -6,6 +6,11 @@ import com.mygdx.game.screens.GameScreen;
 import com.mygdx.game.screens.MainScreen;
 import com.mygdx.game.screens.Screens;
 
+/*
+IMPORTANTE:MI JUEGO ESTA PENSADO PARA EJCUTARSE EN ESCRITORIO, PORQUE NO  CONSIGO REDIMENSIONAR LA IMAGEN DEL FONDO
+
+
+*/
 public class Main extends Game {
 	private SpriteBatch batch;
 

@@ -15,6 +15,8 @@ import com.mygdx.game.Main;
 import com.mygdx.game.actors.Paddle;
 import com.mygdx.game.actors.RightPaddle;
 
+//IMPORTANTE:MI JUEGO ESTA PENSADO PARA EJCUTARSE EN ESCRITORIO, PORQUE NO  CONSIGO REDIMENSIONAR LA IMAGEN DEL FONDO
+
 public class GameScreen extends AbstractScreen {
 
     private SpriteBatch batch;
