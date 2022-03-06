@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.mygdx.game.actors.Ball;
 import com.mygdx.game.actors.LeftPaddle;
 import com.mygdx.game.Main;
@@ -25,13 +26,14 @@ public class GameScreen extends AbstractScreen {
     private BitmapFont font; // Nos permite introducir texto en en el juego.
     private Preferences preferencias; // Permite almacenar información en un fichero xml, de manera que el juego pueda extraerlos y sobreescribirlos.
     private int puntuacion, puntuacionMaxima; // Las dos puntuaciones del juego.
+    private int gol,golesmaximo;
 
     public GameScreen(Main main) {
 
         super(main);
         preferencias = Gdx.app.getPreferences("Preferencias pong");
         puntuacionMaxima = preferencias.getInteger("puntuacionMaxima");
-
+        golesmaximo = preferencias.getInteger("golesmaximo");
     }
 
     @Override
@@ -59,11 +61,14 @@ public class GameScreen extends AbstractScreen {
         ball.update(palaizquierda,paladerecha);// Permite que la bola se mueva, y al pasarle las dos palas podemos detectar la colisión con ellas.
         salirMenu();
         batch.begin();
-        batch.draw(texture,0,0,texture.getWidth() / escala ,texture.getHeight() / escala);
+        resize(texture.getWidth(), texture.getHeight());
+        batch.draw(texture,0,0,texture.getWidth() ,texture.getHeight() );
         palaizquierda.draw(batch);
         paladerecha.draw(batch);
-        font.draw(batch,"P " + Integer.toString(puntuacion), Gdx.graphics.getWidth() / 4,Gdx.graphics.getHeight() - 5);
-        font.draw(batch,"PMX " + Integer.toString(puntuacionMaxima),  Gdx.graphics.getWidth()-Gdx.graphics.getWidth() / 4,Gdx.graphics.getHeight() - 5);
+        font.draw(batch,"Puntuacion " + Integer.toString(puntuacion), (float) (Gdx.graphics.getWidth() / 8.5),Gdx.graphics.getHeight() - 5);
+        font.draw(batch,"Puntuacion Maxima " + Integer.toString(puntuacionMaxima), (float) (Gdx.graphics.getWidth()-Gdx.graphics.getWidth() / 2.2),Gdx.graphics.getHeight() - 5);
+        font.draw(batch,"Goles " + Integer.toString(gol), Gdx.graphics.getWidth() / 3,Gdx.graphics.getHeight() - 5);
+        font.draw(batch,"Goles Maximos " + Integer.toString(golesmaximo), (float) (Gdx.graphics.getWidth()-Gdx.graphics.getWidth() / 4.5),Gdx.graphics.getHeight() - 5);
         ball.draw(batch);
         batch.end();
 
@@ -93,6 +98,13 @@ public class GameScreen extends AbstractScreen {
         }
         if(ball.getBordes().x <= 0){ // Si se sale la pelota por el extremo izquierdo
             puntuacion = 0;
+
+        }
+        if (ball.getBordes().x > Gdx.graphics.getWidth()){
+            gol = gol + 1;
+            if(gol > golesmaximo){// Si la pun0tuación es mayor que la puntuacion máxima.
+                golesmaximo = gol;
+            }
         }
         ball.comprobarPosicionBola();// Colocamos la bola en su posicion si se sale del escenario.
     }
@@ -110,6 +122,7 @@ public class GameScreen extends AbstractScreen {
     @Override
     public void dispose(){
         preferencias.putInteger("puntuacionMaxima",puntuacionMaxima);
+        preferencias.putInteger("golesmaximo",golesmaximo);
         preferencias.flush();
 
     }
